@@ -137,7 +137,8 @@ def save_bbox(namevideo, numframe, bboxes, classes=read_class_names(cfg.YOLO.CLA
     # random.shuffle(colors)
     # random.seed(None)
 
-    name_file = dirsavetxt+namevideo+'_'+str(numframe)+'.txt'
+    name_file = dirsavetxt+'{0:06}'.format(numframe)+'.txt'
+    # name_file = dirsavetxt+namevideo+'_'+str(numframe)+'.txt'
     with open(name_file,'w') as f:
         for i, bbox in enumerate(bboxes):
             coor = np.array(bbox[:4], dtype=np.int32)
@@ -159,7 +160,8 @@ def save_bbox(namevideo, numframe, bboxes, classes=read_class_names(cfg.YOLO.CLA
                 #                 fontScale, (0, 0, 0), bbox_thick//2, lineType=cv2.LINE_AA)
 
                 if not (dirsavetxt==None):
-                    f.write( str(coor[0]) +','+ str(coor[1])+','+ str(coor[2])+','+ str(coor[3])+'\n' )
+                    f.write( classes[class_ind]+' '+str(score)+' '+str(coor[0]) +' '+ str(coor[1])+' '+ str(coor[2])+' '+ str(coor[3])+'\n' )
+                    # f.write( classes[class_ind]+''+str(score)+' '+str(int(coor[0])) +' '+ str(int(coor[1]))+' '+ str(int(coor[2]))+' '+ str(int(coor[3]))+'\n' )
 
     return True
 
